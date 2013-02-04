@@ -110,6 +110,9 @@ private:
  * return an object that will run that function when it is destroyed.
  *
  * Arguments should be valid for a call to std::bind 
+ *
+ * For the DEFER statement this bind is unnecessary, but this allows any 
+ * function call to be bound without having to declare a lambda
  */
 template<typename... TypePack>
 RunOnDeath defer(TypePack&&...bindArg) {
@@ -135,7 +138,7 @@ RunOnDeath defer(TypePack&&...bindArg) {
  *     delete resource;
  *     parent.Notify(SHUTTING_DOWN);
  * )
- * Note we're sppending the line number onto the end, to support multiple 
+ * Note we're appending the line number onto the end, to support multiple 
  * DEFER statements per stack layer
  */
 #define DEFER(cmd) CMD_BUILDER(EVALUATOR(dummy,__LINE__),cmd)
